@@ -7,7 +7,7 @@ version = '1.0-SNAPSHOT'
 
 jar {
     manifest {
-        attributes 'Main-Class': 'шфio.ylab.frontend.Main'
+        attributes 'Main-Class': 'фio.ylab.frontend.Main'
     }
 }
 repositories {
