@@ -33,8 +33,9 @@ CarShop-Service - это консольное приложение на Java, п
   
 ## Запуск приложения:
   1. Склонируйте репозиторий.
-  2. Соберите проект с помощью Gradle: ./gradlew build (Linux/Mac) или gradlew.bat build (Windows).
-  3. Запустите ActionRouter#main из пакета io.ylab.frontend.application.controller.
+  2. git checkout feature/mvp-java-only
+  3. ./gradlew clean build
+  4. java -jar build/libs/backend-1.0-SNAPSHOT.jar
 ## Использование:
   1. При запуске приложения вы увидите главное меню.
   2. Выберите "Login" для входа в систему.
