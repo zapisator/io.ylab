@@ -45,7 +45,6 @@ public class LoginActionHandler extends DefaultMenuActionHandler {
     public Response<Session> handleAndGetState() {
         helper.writeLine(view.toString());
         final String option = helper.readLine();
-        System.out.println("option: " + option);
         Session session = null;
         if ("2".equals(option)) {
             helper.writeLine("See you!");

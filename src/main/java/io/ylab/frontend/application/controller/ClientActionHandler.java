@@ -3,7 +3,6 @@ package io.ylab.frontend.application.controller;
 import io.ylab.backend.domain.model.Car;
 import io.ylab.backend.infrastructure.rest.router.RestRouter;
 import io.ylab.common.header.HeaderType;
-import io.ylab.common.method.MethodType;
 import io.ylab.common.request.Request;
 import io.ylab.common.response.Response;
 import io.ylab.frontend.infrastructure.console.ConsoleHelper;
@@ -52,7 +51,6 @@ public class ClientActionHandler extends DefaultMenuActionHandler {
         console.writeLine(view.toString());
         console.writeLine("3. Exit");
         final String option = console.readLine();
-        System.out.println("option: " + option);
 
         switch (option) {
             case "0":

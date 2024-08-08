@@ -90,10 +90,10 @@ public class ActionRouter {
         ));
 
         // TODO: убрать это присвоение
-        router.session = Session.builder()
-                .role(CLIENT)
-                .user(new User("client", "client", Collections.singletonList(CLIENT)))
-                .build();
+//        router.session = Session.builder()
+//                .role(CLIENT)
+//                .user(new User("client", "client", Collections.singletonList(CLIENT)))
+//                .build();
         return router;
     }
 

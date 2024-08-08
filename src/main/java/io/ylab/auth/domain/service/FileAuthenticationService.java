@@ -2,14 +2,13 @@ package io.ylab.auth.domain.service;
 
 import io.ylab.auth.domain.model.User;
 import io.ylab.common.authorization.UserRole;
+import io.ylab.frontend.infrastructure.resources.DefaultResourceProvider;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.file.Paths;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -42,21 +41,21 @@ public class FileAuthenticationService implements AuthenticationService {
         final FileAuthenticationService authenticationService = new FileAuthenticationService();
 
         try {
-            final URI classPath = requireNonNull(Thread.currentThread()
-                    .getContextClassLoader()
-                    .getResource(""))
-                    .toURI();
-            final String configPath = Paths.get(classPath)
-                    .getParent()
-                    .getParent()
-                    .getParent()
-                    .getParent()
-                    .resolve("config/config.properties")
-                    .toString();
-            authenticationService.loadUsersFromConfig(configPath);
+//            final URI classPath = requireNonNull(Thread.currentThread()
+//                    .getContextClassLoader()
+//                    .getResource(""))
+//                    .toURI();
+//            final String configPath = Paths.get(classPath)
+//                    .getParent()
+//                    .getParent()
+//                    .getParent()
+//                    .getParent()
+//                    .resolve("config/config.properties")
+//                    .toString();
+            authenticationService.loadUsersFromConfig();
 
             return authenticationService;
-        } catch (URISyntaxException | IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -73,26 +72,27 @@ public class FileAuthenticationService implements AuthenticationService {
     /**
      * Загружает пользователей из файла конфигурации.
      *
-     * @param configFilePath Путь к файлу конфигурации.
+//     * @param configFilePath Путь к файлу конфигурации.
      * @throws IOException В случае ошибки при чтении файла.
      */
-    private void loadUsersFromConfig(String configFilePath) throws IOException {
-        try (FileInputStream input = new FileInputStream(configFilePath)) {
-            final Properties prop = new Properties();
+    private void loadUsersFromConfig() throws IOException {
+//        try (FileInputStream input = new FileInputStream(configFilePath)) {
+        final DefaultResourceProvider resourceProvider = new DefaultResourceProvider("config");
+//            final Properties prop = new Properties();
+//
+//            prop.load(input);
 
-            prop.load(input);
-
-            final String adminUsername = prop.getProperty("admin.username");
-            final String adminPasswordHash = prop.getProperty("admin.passwordHash");
-            final String managerUsername = prop.getProperty("manager.username");
-            final String managerPasswordHash = prop.getProperty("manager.passwordHash");
-            final String clientUsername = prop.getProperty("client.username");
-            final String clientPasswordHash = prop.getProperty("client.passwordHash");
+            final String adminUsername = resourceProvider.getString("admin.username");
+            final String adminPasswordHash = resourceProvider.getString("admin.passwordHash");
+            final String managerUsername = resourceProvider.getString("manager.username");
+            final String managerPasswordHash = resourceProvider.getString("manager.passwordHash");
+            final String clientUsername = resourceProvider.getString("client.username");
+            final String clientPasswordHash = resourceProvider.getString("client.passwordHash");
 
             users.add(new User(adminUsername, adminPasswordHash, singletonList(UserRole.ADMIN)));
             users.add(new User(managerUsername, managerPasswordHash, singletonList(UserRole.MANAGER)));
             users.add(new User(clientUsername, clientPasswordHash, singletonList(UserRole.CLIENT)));
-        }
+//        }
     }
 
     /**
