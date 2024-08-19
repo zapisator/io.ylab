@@ -1,6 +1,7 @@
 package io.ylab.backend.domain.model;
 
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Value;
 
 /**
@@ -13,6 +14,7 @@ public class Car {
     /**
      * Уникальный идентификатор автомобиля.
      */
+    @EqualsAndHashCode.Exclude
     Long id;
 
     /**

@@ -1,6 +1,7 @@
 package io.ylab.backend.domain.model;
 
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Value;
 
 import java.time.LocalDateTime;
@@ -15,6 +16,7 @@ public class Order {
     /**
      * Уникальный идентификатор заказа.
      */
+    @EqualsAndHashCode.Exclude
     Long id;
 
     /**
