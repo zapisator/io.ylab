@@ -1,18 +1,11 @@
 package io.ylab.backend.infrastructure.repository;
 
 import io.ylab.backend.domain.model.Car;
-
-import java.util.List;
+import io.ylab.backend.infrastructure.repository.common.JpaRepository;
 
 /**
  * Интерфейс репозитория для работы с автомобилями.
  */
-public interface CarRepository {
+public interface CarRepository extends JpaRepository<Car, Long> {
 
-    /**
-     * Возвращает список всех автомобилей.
-     *
-     * @return Список всех автомобилей.
-     */
-    List<Car> findAll();
 }
